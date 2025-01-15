@@ -61,6 +61,61 @@ namespace C43_G05_OOP03
             return string.Format(CultureInfo.CurrentCulture, "{0:C}", Salary);
         }
     }
+
+    public class Book
+    {
+        public string Title { get; private set; }
+        public string Author { get; private set; }
+        public string ISBN { get; private set; }
+
+        public Book(string title, string author, string isbn)
+        {
+            Title = !string.IsNullOrWhiteSpace(title) ? title : throw new ArgumentException("Title cannot be empty.");
+            Author = !string.IsNullOrWhiteSpace(author) ? author : throw new ArgumentException("Author cannot be empty.");
+            ISBN = !string.IsNullOrWhiteSpace(isbn) ? isbn : throw new ArgumentException("ISBN cannot be empty.");
+        }
+
+        public virtual void DisplayDetails()
+        {
+            Console.WriteLine($"Title: {Title}");
+            Console.WriteLine($"Author: {Author}");
+            Console.WriteLine($"ISBN: {ISBN}");
+        }
+    }
+
+    public class EBook : Book
+    {
+        public double FileSize { get; private set; } 
+
+        public EBook(string title, string author, string isbn, double fileSize)
+            : base(title, author, isbn)
+        {
+            FileSize = fileSize > 0 ? fileSize : throw new ArgumentException("File size must be positive.");
+        }
+
+        public override void DisplayDetails()
+        {
+            base.DisplayDetails();
+            Console.WriteLine($"File Size: {FileSize} MB");
+        }
+    }
+
+    public class PrintedBook : Book
+    {
+        public int PageCount { get; private set; }
+
+        public PrintedBook(string title, string author, string isbn, int pageCount)
+            : base(title, author, isbn)
+        {
+            PageCount = pageCount > 0 ? pageCount : throw new ArgumentException("Page count must be positive.");
+        }
+
+        public override void DisplayDetails()
+        {
+            base.DisplayDetails();
+            Console.WriteLine($"Page Count: {PageCount}");
+        }
+    }
     internal class Program
     {
         static void Main(string[] args)
@@ -101,6 +156,34 @@ namespace C43_G05_OOP03
                     Console.WriteLine(emp.ToString());
                     Console.WriteLine("-------------------");
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+
+            try
+            {
+                EBook ebook = new EBook(
+                    title: "CS",
+                    author: "sayed mohamed ",
+                    isbn: "123-12",
+                    fileSize: 2.5
+                );
+
+                PrintedBook printedBook = new PrintedBook(
+                    title: "Programming Principles",
+                    author: "SAYED MOHAMED ",
+                    isbn: "123-12",
+                    pageCount: 350
+                );
+
+                Console.WriteLine("EBook Details:");
+                ebook.DisplayDetails();
+                Console.WriteLine("-------------------");
+                Console.WriteLine("Printed Book Details:");
+                printedBook.DisplayDetails();
             }
             catch (Exception ex)
             {
