@@ -67,18 +67,42 @@ namespace C43_G05_OOP03
         {
             try
             {
-                Employee emp = new Employee(
-                    id: 100,
+                Employee[] EmpArr = new Employee[3];
+
+                EmpArr[0] = new Employee(
+                    id: 1,
                     name: "sayed mohamed sayed ",
                     gender: "M",
-                    securityLevel: SecurityLevel.Developer,
-                    salary: 85000.50m,
-                    hireDate: new DateTime(2025, 1,15 )
+                    securityLevel: SecurityLevel.DBA,
+                    salary: 120000m,
+                    hireDate: new DateTime(2025, 1, 12)
                 );
 
-                Console.WriteLine(emp.ToString());
+                EmpArr[1] = new Employee(
+                    id: 2,
+                    name: "mohamed sayed ",
+                    gender: "M",
+                    securityLevel: SecurityLevel.Guest,
+                    salary: 300000m,
+                    hireDate: new DateTime(2025, 6, 15)
+                );
+
+                EmpArr[2] = new Employee(
+                    id: 3,
+                    name: "karam mohamed ",
+                    gender: "M",
+                    securityLevel: SecurityLevel.SecurityOfficer,
+                    salary: 150000m,
+                    hireDate: new DateTime(2025, 5, 10)
+                );
+
+                foreach (Employee emp in EmpArr)
+                {
+                    Console.WriteLine(emp.ToString());
+                    Console.WriteLine("-------------------");
+                }
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
