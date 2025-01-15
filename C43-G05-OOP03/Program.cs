@@ -181,7 +181,7 @@ namespace C43_G05_OOP03
 
                 Console.WriteLine("EBook Details:");
                 ebook.DisplayDetails();
-                Console.WriteLine("-------------------");
+                Console.WriteLine("---------------------");
                 Console.WriteLine("Printed Book Details:");
                 printedBook.DisplayDetails();
             }
